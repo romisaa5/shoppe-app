@@ -8,7 +8,6 @@ class Routes {
   static final registerView = '/registerview';
   static final forgetpasssword = '/forgetpassword';
   static final verificationScreen = '/verificationScreen';
-  static final passwordreset = '/passwordreset';
   static final setnewpassword = '/setnewpassword';
   static final bottnavbar = '/bottomnavbar';
   static final detailsScreen = '/detailsScreen';

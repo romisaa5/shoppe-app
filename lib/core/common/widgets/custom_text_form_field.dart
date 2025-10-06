@@ -9,7 +9,7 @@ class AppTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final TextStyle? inputTextStyle;
   final TextStyle? hintStyle;
-  final String hintText;
+  final String? hintText;
   final bool? isObscureText;
   final Widget? suffixIcon;
   final Color? backgroundColor;
@@ -21,6 +21,8 @@ class AppTextFormField extends StatelessWidget {
   final InputBorder? errorBorder;
   final int? maxLines;
   final bool isUnderline;
+  final TextInputType? keyboardType;
+  final TextAlign? textAlign;
 
   const AppTextFormField({
     super.key,
@@ -29,7 +31,7 @@ class AppTextFormField extends StatelessWidget {
     this.enabledBorder,
     this.inputTextStyle,
     this.hintStyle,
-    required this.hintText,
+    this.hintText,
     this.isObscureText,
     this.suffixIcon,
     this.backgroundColor,
@@ -41,6 +43,8 @@ class AppTextFormField extends StatelessWidget {
     this.errorBorder,
     this.maxLines,
     this.isUnderline = false,
+    this.keyboardType,
+    this.textAlign,
   });
 
   @override
@@ -55,7 +59,7 @@ class AppTextFormField extends StatelessWidget {
             ),
           )
         : OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4.r),
+            borderRadius: BorderRadius.circular(10.r),
             borderSide: BorderSide(
               color: const Color.fromARGB(255, 201, 200, 200),
               width: 1.2.w,
@@ -69,6 +73,8 @@ class AppTextFormField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              keyboardType: keyboardType,
+              textAlign: textAlign ?? TextAlign.start,
               maxLines: maxLines,
               controller: controller,
               onChanged: (value) {
@@ -108,6 +114,7 @@ class AppTextFormField extends StatelessWidget {
                         width: 1.2.w,
                       ),
                     ),
+
                 hintText: hintText,
                 hintStyle:
                     hintStyle ??
