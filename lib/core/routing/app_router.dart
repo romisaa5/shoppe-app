@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:e_commerce_app/features/social_auth/presentation/screens/social_auth_screen.dart';
 import 'package:e_commerce_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +18,10 @@ abstract class AppRouter {
         GoRoute(
           path: Routes.welcomeView,
           builder: (context, state) => OnboardingScreen(),
+        ),
+        GoRoute(
+          path: Routes.socialAuthScreen,
+          builder: (context, state) => SocialAuthScreen(),
         ),
       ],
     );

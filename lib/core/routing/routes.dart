@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 class Routes {
   static final splash = '/splash';
   static final welcomeView = '/welcomeview';
+  static final socialAuthScreen = '/socialAuthScreen';
   static final loginView = '/loginview';
   static final registerView = '/registerview';
   static final forgetpasssword = '/forgetpassword';

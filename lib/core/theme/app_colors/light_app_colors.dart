@@ -12,7 +12,7 @@ class LightAppColors {
   static const Color grey500 = Color(0xFF9E9E9E);
   static const Color grey400 = Color(0xFFF5F6FA);
   static const Color grey300 = Color(0xFFE0E0E0);
-  static const Color grey200 = Color(0xFFEEEEEE);
+  static const Color grey200 = Color(0xFFF5F6FA);
   static const Color grey100 = Color(0xFFDFE1E7);
   static const Color grey50 = Color(0xFFFAFAFA);
   static const Color grey0 = Color(0xFFFFFFFF);
@@ -24,6 +24,10 @@ class LightAppColors {
 
   static const Color neutral800 = Color(0xFF333333);
   static const Color neutral300 = Color(0xFF818898);
+  //---------- social Auth ----------
+  static const Color facebookBlue = Color(0xFF4267B2);
+  static const Color googleRed = Color(0xFFEA4335);
+  static const Color twitterBabyBlue = Color(0xFF1DA1F2);
 
   // ---------- Status ----------
   static const Color error900 = Color(0xFF93000A);

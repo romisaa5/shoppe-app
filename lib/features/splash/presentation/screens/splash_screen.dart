@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
 
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 5), () {
       if (!mounted) return;
       GoRouter.of(context).go(Routes.welcomeView);
     });
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Stack(
           children: [
             AnimatedPositioned(
-              duration: const Duration(seconds: 2),
+              duration: const Duration(seconds: 3),
               curve: Curves.easeOutBack,
               top: _animate ? screenHeight / 2 - 75 : screenHeight,
               left: 0,

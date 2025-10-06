@@ -1,13 +1,22 @@
 import 'dart:ui';
 import 'package:e_commerce_app/core/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/core/helper/extentions.dart';
+import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors/light_app_colors.dart';
 import 'package:e_commerce_app/core/theme/app_texts/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  String? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -75,16 +84,49 @@ class OnboardingScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomButton(
-                        textColor: LightAppColors.grey600,
                         text: 'Men',
-                        color: LightAppColors.grey400,
                         width: 150.w,
+                        color: selectedGender == 'Men'
+                            ? LightAppColors.primaryColor
+                            : LightAppColors.grey400,
+                        textColor: selectedGender == 'Men'
+                            ? Colors.white
+                            : LightAppColors.grey600,
+                        onTap: () {
+                          setState(() {
+                            selectedGender = 'Men';
+                          });
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            GoRouter.of(context).push(Routes.socialAuthScreen);
+                          });
+                        },
                       ),
-                      CustomButton(text: 'Women', width: 150.w),
+                      CustomButton(
+                        text: 'Women',
+                        width: 150.w,
+                        color: selectedGender == 'Women'
+                            ? LightAppColors.primaryColor
+                            : LightAppColors.grey400,
+                        textColor: selectedGender == 'Women'
+                            ? Colors.white
+                            : LightAppColors.grey600,
+                        onTap: () {
+                          setState(() {
+                            selectedGender = 'Women';
+                          });
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            GoRouter.of(context).push(Routes.socialAuthScreen);
+                          });
+                        },
+                      ),
                     ],
                   ),
+
                   20.ph,
                   GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).push(Routes.socialAuthScreen);
+                    },
                     child: Text(
                       'Skip',
                       style: AppTextStyles.font14Regular.copyWith(

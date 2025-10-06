@@ -137,6 +137,27 @@ class AppTextStyles {
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
   );
+  // ---------- Font 28 sizes ----------
+  static TextStyle font28Regular = TextStyle(
+    fontSize: 28.sp,
+    fontWeight: FontWeightHelper.regular,
+    fontFamily: AppFonts.cairo,
+    letterSpacing: 0.5.sp,
+  );
+
+  static TextStyle font28SemiBold = TextStyle(
+    fontSize: 28.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    fontFamily: AppFonts.cairo,
+    letterSpacing: 0.5.sp,
+  );
+
+  static TextStyle font28Bold = TextStyle(
+    fontSize: 28.sp,
+    fontWeight: FontWeightHelper.bold,
+    fontFamily: AppFonts.cairo,
+    letterSpacing: 0.5.sp,
+  );
 
   // ---------- Font 32 sizes ----------
   static TextStyle font32Regular = TextStyle(
