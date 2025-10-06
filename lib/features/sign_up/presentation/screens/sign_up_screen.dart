@@ -4,51 +4,61 @@ import 'package:e_commerce_app/core/helper/extentions.dart';
 import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors/light_app_colors.dart';
 import 'package:e_commerce_app/core/theme/app_texts/app_text_styles.dart';
+import 'package:e_commerce_app/features/sign_up/presentation/widgets/remember_me_switch.dart';
+import 'package:e_commerce_app/features/sign_up/presentation/widgets/sign_up_form.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-class SocialAuthScreen extends StatelessWidget {
-  const SocialAuthScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    usernameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomBottomContainer(
-        text: 'Create an Account',
+        text: 'Sign Up',
         onTap: () {
-          GoRouter.of(context).push(Routes.registerView);
+          if (formKey.currentState!.validate()) {
+            GoRouter.of(context).go(Routes.bottnavbar);
+          }
         },
       ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.h),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               20.ph,
               CustomArrowBack(),
-              Text('Let’s Get Started', style: AppTextStyles.font28SemiBold),
+              Text('Sign Up', style: AppTextStyles.font28SemiBold),
               Spacer(),
-              _buildSocialButton(
-                assetPath: 'assets/icons/Facebook.svg',
-                text: 'Facebook',
-                color: LightAppColors.facebookBlue,
+              SignUpForm(
+                formKey: formKey,
+                emailController: emailController,
+                passwordController: passwordController,
+                usernameController: usernameController,
               ),
-              10.ph,
-              _buildSocialButton(
-                assetPath: 'assets/icons/Twitter.svg',
-                text: 'Twitter',
-                color: LightAppColors.twitterBabyBlue,
-              ),
-              10.ph,
-              _buildSocialButton(
-                assetPath: 'assets/icons/Google.svg',
-                text: 'Google',
-                color: LightAppColors.googleRed,
-              ),
+              40.ph,
+              RememberMeSwitch(),
               Spacer(),
               RichText(
                 text: TextSpan(
@@ -76,31 +86,6 @@ class SocialAuthScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSocialButton({
-    required String assetPath,
-    required String text,
-    required Color color,
-  }) {
-    return Container(
-      height: 50.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        color: color,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(assetPath, height: 22.h, width: 22.h),
-          6.pw,
-          Text(
-            text,
-            style: AppTextStyles.font18Regular.copyWith(color: Colors.white),
-          ),
-        ],
       ),
     );
   }

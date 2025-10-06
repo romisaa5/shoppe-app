@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/routing/app_router.dart';
+import 'package:e_commerce_app/core/theme/app_colors/light_app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp.router(
+          theme: ThemeData(scaffoldBackgroundColor: LightAppColors.white),
           routerConfig: AppRouter.router,
           debugShowCheckedModeBanner: false,
         );

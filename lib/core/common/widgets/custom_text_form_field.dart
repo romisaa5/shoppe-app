@@ -20,6 +20,7 @@ class AppTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final InputBorder? errorBorder;
   final int? maxLines;
+  final bool isUnderline;
 
   const AppTextFormField({
     super.key,
@@ -39,69 +40,116 @@ class AppTextFormField extends StatelessWidget {
     this.onChanged,
     this.errorBorder,
     this.maxLines,
+    this.isUnderline = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    return TextFormField(
-      maxLines: maxLines,
+    final colorScheme = Theme.of(context).colorScheme;
+
+    InputBorder border = isUnderline
+        ? UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: const Color.fromARGB(255, 201, 200, 200),
+              width: 1.2.w,
+            ),
+          )
+        : OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.r),
+            borderSide: BorderSide(
+              color: const Color.fromARGB(255, 201, 200, 200),
+              width: 1.2.w,
+            ),
+          );
+
+    return FormField<String>(
       validator: validator,
-      onChanged: onChanged,
-      controller: controller,
-      cursorColor: LightAppColors.primaryColor,
-      decoration: InputDecoration(
-        isDense: true,
-        contentPadding:
-            contentPadding ??
-            EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
-        focusedBorder:
-            focusedBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
-              borderSide: BorderSide(
-                color: const Color.fromARGB(255, 201, 200, 200),
-                width: 1.3.w,
+      builder: (FormFieldState<String> state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              maxLines: maxLines,
+              controller: controller,
+              onChanged: (value) {
+                state.didChange(value);
+                onChanged?.call(value);
+              },
+              focusNode: focusNode,
+              obscureText: isObscureText ?? false,
+              cursorColor: LightAppColors.primaryColor,
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding:
+                    contentPadding ??
+                    EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                focusedBorder:
+                    focusedBorder ??
+                    border.copyWith(
+                      borderSide: BorderSide(
+                        color: LightAppColors.primaryColor,
+                        width: 1.5.w,
+                      ),
+                    ),
+                enabledBorder: enabledBorder ?? border,
+                errorBorder:
+                    errorBorder ??
+                    border.copyWith(
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: 1.2.w,
+                      ),
+                    ),
+                focusedErrorBorder:
+                    errorBorder ??
+                    border.copyWith(
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: 1.2.w,
+                      ),
+                    ),
+                hintText: hintText,
+                hintStyle:
+                    hintStyle ??
+                    AppTextStyles.font14Regular.copyWith(
+                      color: colorScheme.secondary.withValues(alpha: .5),
+                    ),
+                suffixIcon: suffixIcon,
+                prefixIcon: prefixIcon,
+                fillColor: backgroundColor ?? Colors.white,
+                filled: true,
               ),
+              style:
+                  inputTextStyle ??
+                  AppTextStyles.font16Regular.copyWith(
+                    color: colorScheme.secondary,
+                  ),
             ),
-        enabledBorder:
-            enabledBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
-              borderSide: BorderSide(
-                color: const Color.fromARGB(255, 201, 200, 200),
-                width: 1.w,
+            if (state.hasError) // ✅ هنا بنعرض الأيقونة + الرسالة
+              Padding(
+                padding: EdgeInsets.only(top: 6.h, left: 8.w),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.error_outline,
+                      color: colorScheme.error,
+                      size: 16.sp,
+                    ),
+                    5.w.horizontalSpace,
+                    Flexible(
+                      child: Text(
+                        state.errorText ?? '',
+                        style: AppTextStyles.font12Regular.copyWith(
+                          color: colorScheme.error,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-        errorBorder:
-            errorBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
-              borderSide: BorderSide(color: colorScheme.error, width: 1.w),
-            ),
-        focusedErrorBorder:
-            errorBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
-              borderSide: BorderSide(color: colorScheme.error, width: 1.w),
-            ),
-        hintStyle:
-            hintStyle ??
-            AppTextStyles.font14Regular.copyWith(
-              color: colorScheme.secondary.withValues(alpha: .5),
-            ),
-        hintText: hintText,
-        suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
-        fillColor: backgroundColor ?? Colors.white,
-        filled: true,
-      ),
-      focusNode: focusNode,
-      obscureText: isObscureText ?? false,
-      style:
-          inputTextStyle ??
-          AppTextStyles.font16Regular.copyWith(color: colorScheme.secondary),
+          ],
+        );
+      },
     );
   }
 }
