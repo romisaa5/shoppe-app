@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
     this.imagePath,
     this.height,
     this.isLoading = false,
+    this.textColor,
   });
 
   final String text;
@@ -24,6 +25,7 @@ class CustomButton extends StatelessWidget {
   final void Function()? onTap;
   final String? imagePath;
   final bool isLoading;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -47,7 +49,9 @@ class CustomButton extends StatelessWidget {
                   ? Center(child: CircularProgressIndicator(color: Colors.grey))
                   : Text(
                       text,
-                      style: AppTextStyles.font16Regular,
+                      style: AppTextStyles.font16Regular.copyWith(
+                        color: textColor ?? LightAppColors.white,
+                      ),
                       textAlign: TextAlign.center,
                     ),
             ],

@@ -8,9 +8,9 @@ class LightAppColors {
   static const Color grey900 = Color(0xFF011308);
   static const Color grey800 = Color(0xFF424242);
   static const Color grey700 = Color(0xFF616161);
-  static const Color grey600 = Color(0xFF757575);
+  static const Color grey600 = Color(0xFF8F959E);
   static const Color grey500 = Color(0xFF9E9E9E);
-  static const Color grey400 = Color(0xFFBDBDBD);
+  static const Color grey400 = Color(0xFFF5F6FA);
   static const Color grey300 = Color(0xFFE0E0E0);
   static const Color grey200 = Color(0xFFEEEEEE);
   static const Color grey100 = Color(0xFFDFE1E7);
@@ -43,4 +43,8 @@ class LightAppColors {
   static const Color accent300 = Color(0xFFE5E7EB);
 
   // ---------- Gradients ----------
+  static const List<Color> purbleGradient = [
+    Color(0xFFB0A3E5),
+    Color(0xFF7661C5),
+  ];
 }
