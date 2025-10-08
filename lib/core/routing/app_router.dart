@@ -3,10 +3,13 @@ import 'package:e_commerce_app/features/forget_password/presentation/screens/for
 import 'package:e_commerce_app/features/forget_password/presentation/screens/new_password_screen.dart';
 import 'package:e_commerce_app/features/forget_password/presentation/screens/verification_code_screen.dart';
 import 'package:e_commerce_app/features/login/presentation/screens/login_screen.dart';
+import 'package:e_commerce_app/features/nav_bar/presentation/manager/navbar_cubit/navbar_cubit.dart';
+import 'package:e_commerce_app/features/nav_bar/presentation/screens/nav_bar.dart';
 import 'package:e_commerce_app/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:e_commerce_app/features/sign_up/presentation/screens/sign_up_screen.dart';
 import 'package:e_commerce_app/features/social_auth/presentation/screens/social_auth_screen.dart';
 import 'package:e_commerce_app/features/splash/presentation/screens/splash_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
@@ -14,7 +17,7 @@ abstract class AppRouter {
 
   static void initRouter() {
     router = GoRouter(
-      initialLocation: Routes.splash,
+      initialLocation: Routes.bottnavbar,
       routes: [
         GoRoute(
           path: Routes.splash,
@@ -47,6 +50,11 @@ abstract class AppRouter {
         GoRoute(
           path: Routes.setnewpassword,
           builder: (context, state) => NewPasswordScreen(),
+        ),
+        GoRoute(
+          path: Routes.bottnavbar,
+          builder: (context, state) =>
+              BlocProvider(create: (context) => NavbarCubit(), child: NavBar()),
         ),
       ],
     );
