@@ -1,7 +1,9 @@
+import 'package:e_commerce_app/core/di/dependency_injection.dart';
 import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/features/forget_password/presentation/screens/forget_password_screen.dart';
 import 'package:e_commerce_app/features/forget_password/presentation/screens/new_password_screen.dart';
 import 'package:e_commerce_app/features/forget_password/presentation/screens/verification_code_screen.dart';
+import 'package:e_commerce_app/features/login/presentation/manager/cubit/login_cubit.dart';
 import 'package:e_commerce_app/features/login/presentation/screens/login_screen.dart';
 import 'package:e_commerce_app/features/nav_bar/presentation/manager/navbar_cubit/navbar_cubit.dart';
 import 'package:e_commerce_app/features/nav_bar/presentation/screens/nav_bar.dart';
@@ -17,7 +19,7 @@ abstract class AppRouter {
 
   static void initRouter() {
     router = GoRouter(
-      initialLocation: Routes.bottnavbar,
+      initialLocation: Routes.loginView,
       routes: [
         GoRoute(
           path: Routes.splash,
@@ -37,7 +39,10 @@ abstract class AppRouter {
         ),
         GoRoute(
           path: Routes.loginView,
-          builder: (context, state) => LoginScreen(),
+          builder: (context, state) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: LoginScreen(),
+          ),
         ),
         GoRoute(
           path: Routes.forgetpasssword,

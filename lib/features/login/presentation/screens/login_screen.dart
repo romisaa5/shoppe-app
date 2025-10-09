@@ -4,30 +4,18 @@ import 'package:e_commerce_app/core/helper/extentions.dart';
 import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors/light_app_colors.dart';
 import 'package:e_commerce_app/core/theme/app_texts/app_text_styles.dart';
+import 'package:e_commerce_app/features/login/presentation/manager/cubit/login_cubit.dart';
+import 'package:e_commerce_app/features/login/presentation/widgets/login_bloc_listener.dart';
 import 'package:e_commerce_app/features/login/presentation/widgets/login_form.dart';
 import 'package:e_commerce_app/features/sign_up/presentation/widgets/remember_me_switch.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +23,11 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomNavigationBar: CustomBottomContainer(
         text: 'Login',
         onTap: () {
-          if (formKey.currentState!.validate()) {
-            GoRouter.of(context).go(Routes.bottnavbar);
-          }
+          validateThenDoLogin(context);
         },
       ),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.h),
           child: Column(
             children: [
@@ -55,12 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: LightAppColors.grey500,
                 ),
               ),
-              Spacer(flex: 2),
-              LoginForm(
-                formKey: formKey,
-                emailController: emailController,
-                passwordController: passwordController,
-              ),
+              40.h.ph,
+              LoginForm(formKey: context.read<LoginCubit>().formKey),
               20.ph,
               Align(
                 alignment: Alignment.centerRight,
@@ -76,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              20.ph,
+              20.h.ph,
               RememberMeSwitch(),
-              Spacer(),
+              20.h.ph,
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -99,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              Spacer(flex: 2),
+              20.ph,
               RichText(
                 text: TextSpan(
                   children: [
@@ -122,11 +104,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
+              LoginBlocListener(),
               20.ph,
             ],
           ),
         ),
       ),
     );
+  }
+
+  void validateThenDoLogin(BuildContext context) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+      context.read<LoginCubit>().login();
+    }
   }
 }
