@@ -1,7 +1,10 @@
 class ApiConstants {
   static const String baseUrl = 'https://accessories-eshop.runasp.net/api/';
+  //Auth Endpoints
   static const String registerEndpoint = 'auth/register';
   static const String loginEndpoint = 'auth/login';
+  static const String apiVerifyEmail = "auth/verify-email";
+  static const String apiResendOtp = "auth/resend-otp";
 }
 
 class ApiErrors {

@@ -14,4 +14,5 @@ class AppIcons {
   static const String logo = '$_basePath/Logo.svg';
   static const String twitter = '$_basePath/Twitter.svg';
   static const String searchIcon = '$_basePath/Search.svg';
+  static const String verifyIcon = '$_basePath/verify_email.svg';
 }
