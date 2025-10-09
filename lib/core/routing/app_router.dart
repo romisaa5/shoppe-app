@@ -8,6 +8,7 @@ import 'package:e_commerce_app/features/login/presentation/screens/login_screen.
 import 'package:e_commerce_app/features/nav_bar/presentation/manager/navbar_cubit/navbar_cubit.dart';
 import 'package:e_commerce_app/features/nav_bar/presentation/screens/nav_bar.dart';
 import 'package:e_commerce_app/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:e_commerce_app/features/sign_up/presentation/manager/cubit/sign_up_cubit.dart';
 import 'package:e_commerce_app/features/sign_up/presentation/screens/sign_up_screen.dart';
 import 'package:e_commerce_app/features/social_auth/presentation/screens/social_auth_screen.dart';
 import 'package:e_commerce_app/features/splash/presentation/screens/splash_screen.dart';
@@ -19,7 +20,7 @@ abstract class AppRouter {
 
   static void initRouter() {
     router = GoRouter(
-      initialLocation: Routes.loginView,
+      initialLocation: Routes.registerView,
       routes: [
         GoRoute(
           path: Routes.splash,
@@ -35,7 +36,10 @@ abstract class AppRouter {
         ),
         GoRoute(
           path: Routes.registerView,
-          builder: (context, state) => SignUpScreen(),
+          builder: (context, state) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: SignUpScreen(),
+          ),
         ),
         GoRoute(
           path: Routes.loginView,

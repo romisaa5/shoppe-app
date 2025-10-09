@@ -80,6 +80,7 @@ class _LoginFormState extends State<LoginForm> {
               } else if (!AppRegex.isEmailValid(value)) {
                 return 'Enter a valid email';
               }
+              return null;
             },
           ),
           20.ph,
