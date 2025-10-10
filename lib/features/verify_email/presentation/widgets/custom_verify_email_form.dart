@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/core/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/core/helper/app_regex.dart';
 import 'package:e_commerce_app/core/helper/extentions.dart';
-import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_email/verify_email_cubit.dart';
+import 'package:e_commerce_app/features/verify_email/presentation/manager/resend_otp/resend_otp_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,12 +16,12 @@ class CustomVerifyEmailForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<VerifyEmailCubit>().formKey,
+      key: context.read<ResendOtpCubit>().formKey,
       child: Column(
         children: [
           AppTextFormField(
             hintText: 'Email',
-            controller: context.read<VerifyEmailCubit>().emailController,
+            controller: context.read<ResendOtpCubit>().emailController,
             keyboardType: TextInputType.emailAddress,
             validator: (value) {
               final trimmedValue = value?.trim() ?? '';
@@ -39,7 +39,6 @@ class CustomVerifyEmailForm extends StatelessWidget {
             },
             text: 'Verify Email',
           ),
-
           VerifyEmailBlocListener(),
         ],
       ),
@@ -47,8 +46,10 @@ class CustomVerifyEmailForm extends StatelessWidget {
   }
 
   void validateThenDoNavigation(BuildContext context) {
-    if (context.read<VerifyEmailCubit>().formKey.currentState!.validate()) {
-      context.read<VerifyEmailCubit>().emitVerifyEmailStates();
+    if (context.read<ResendOtpCubit>().formKey.currentState!.validate()) {
+      context.read<ResendOtpCubit>().resendOtp(
+        context.read<ResendOtpCubit>().emailController.text.trim(),
+      );
     }
   }
 }

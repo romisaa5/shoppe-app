@@ -1,44 +1,35 @@
 import 'package:e_commerce_app/core/common/widgets/custom_dialog.dart';
-import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_email/verify_email_cubit.dart';
-import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_email/verify_email_state.dart';
+import 'package:e_commerce_app/core/routing/routes.dart';
+import 'package:e_commerce_app/core/theme/app_colors/light_app_colors.dart';
+import 'package:e_commerce_app/features/verify_email/presentation/manager/resend_otp/resend_otp_cubit.dart';
+import 'package:e_commerce_app/features/verify_email/presentation/manager/resend_otp/resend_otp_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/routing/routes.dart';
-import '../../../../core/theme/app_colors/light_app_colors.dart';
 
 class VerifyEmailBlocListener extends StatelessWidget {
   const VerifyEmailBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<VerifyEmailCubit, VerifyEmailState>(
+    return BlocListener<ResendOtpCubit, ResendOtpState>(
       listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is Loading || current is Success || current is Failure,
       listener: (context, state) {
         state.whenOrNull(
           loading: () => _showLoadingDialog(context),
-          success: (loginResponse) {
-            showSuccessDialog(context);
+          success: (data) {
+            final email = context
+                .read<ResendOtpCubit>()
+                .emailController
+                .text
+                .trim();
+            _showSuccessDialog(context, email);
           },
-          error: (error) => _showErrorDialog(context, error),
+          failure: (error) => _showErrorDialog(context, error),
         );
       },
       child: const SizedBox.shrink(),
-    );
-  }
-
-  void _showErrorDialog(BuildContext context, String error) {
-    context.pop();
-    showDialog(
-      context: context,
-      builder: (context) => CustomAlertDialog(
-        dialogColor: Colors.redAccent,
-        dialogHeader: 'Resend OTP Failed',
-        dialogBody: error,
-        dialogIcon: Icons.error,
-        press: () => context.pop(),
-      ),
     );
   }
 
@@ -46,29 +37,42 @@ class VerifyEmailBlocListener extends StatelessWidget {
     showDialog(
       context: context,
       barrierDismissible: false,
-      barrierColor: LightAppColors.primaryColor.withValues(alpha: 0.3),
-      builder: (context) => Center(child: const CircularProgressIndicator()),
+      barrierColor: LightAppColors.primaryColor.withOpacity(0.3),
+      builder: (_) => const Center(child: CircularProgressIndicator()),
     );
   }
 
-  void showSuccessDialog(BuildContext context) {
-    context.pop();
-
-    GoRouter.of(context).pushReplacementNamed(
-      Routes.otpVerification,
-      extra: context.read<VerifyEmailCubit>().emailController,
+  void _showErrorDialog(BuildContext context, String error) {
+    if (Navigator.canPop(context)) Navigator.pop(context);
+    showDialog(
+      context: context,
+      builder: (_) => CustomAlertDialog(
+        dialogColor: Colors.redAccent,
+        dialogHeader: 'Resend OTP Failed',
+        dialogBody: error,
+        dialogIcon: Icons.error,
+        press: () => Navigator.pop(context),
+      ),
     );
+  }
+
+  void _showSuccessDialog(BuildContext context, String email) {
+    if (Navigator.canPop(context)) Navigator.pop(context);
 
     showDialog(
       context: context,
-      builder: (context) => CustomAlertDialog(
+      builder: (_) => CustomAlertDialog(
         dialogColor: LightAppColors.primaryColor,
         dialogHeader: 'Resend OTP Successful',
         dialogBody:
-            'Congratulations, you have successfully resent the OTP!\nAn OTP has been sent to your email inbox. Please use it to verify your email.',
+            'Congratulations! OTP has been sent to your email.\nPlease use it to verify your account.',
         dialogIcon: Icons.check_circle_rounded,
         press: () {
-          context.pop();
+          Navigator.pop(context);
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            GoRouter.of(context).push(Routes.otpVerification, extra: email);
+          });
         },
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/core/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/core/helper/extentions.dart';
-import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_otp/verify_otp_cubit.dart';
+import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_email/verify_email_cubit.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/widgets/verify_otp_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +25,7 @@ class _CustomOtpVerifyFormState extends State<CustomOtpVerifyForm> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<VerifyOtpCubit>().emailController.text = widget.email;
+      context.read<VerifyEmailCubit>().emailController.text = widget.email;
     });
   }
 
@@ -61,13 +61,12 @@ class _CustomOtpVerifyFormState extends State<CustomOtpVerifyForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: /* context.read<VerifyOtpCubit>().formKey*/ GlobalKey<FormState>(),
+      key: context.read<VerifyEmailCubit>().formKey,
       child: Column(
         children: [
           Center(
             child: Pinput(
-              controller: /*context.read<VerifyOtpCubit>().otpController*/
-                  TextEditingController(),
+              controller: context.read<VerifyEmailCubit>().otpController,
               focusNode: _focusNode,
               length: 6,
               showCursor: true,
@@ -117,7 +116,7 @@ class _CustomOtpVerifyFormState extends State<CustomOtpVerifyForm> {
             children: [
               TextButton(
                 onPressed: () {
-                  context.read<VerifyOtpCubit>().otpController.clear();
+                  context.read<VerifyEmailCubit>().otpController.clear();
                   setState(() => _errorMessage = null);
                   _focusNode.requestFocus();
                 },
@@ -139,8 +138,7 @@ class _CustomOtpVerifyFormState extends State<CustomOtpVerifyForm> {
   }
 
   void _validateAndProceed() {
-    final otp = context.read<VerifyOtpCubit>().otpController.text.trim();
-
+    final otp = context.read<VerifyEmailCubit>().otpController.text.trim();
     if (otp.length < 6) {
       setState(() {
         _errorMessage = "Please enter a valid 6-digit code.";
@@ -150,8 +148,8 @@ class _CustomOtpVerifyFormState extends State<CustomOtpVerifyForm> {
         _errorMessage = null;
       });
 
-      if (context.read<VerifyOtpCubit>().formKey.currentState!.validate()) {
-        context.read<VerifyOtpCubit>().emitVerifyOtpStates();
+      if (context.read<VerifyEmailCubit>().formKey.currentState!.validate()) {
+        context.read<VerifyEmailCubit>().emitVerifyEmailStates();
       }
     }
   }

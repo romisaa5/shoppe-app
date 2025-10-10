@@ -39,7 +39,6 @@ class VerifyEmailScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               25.h.ph,
               Text(
                 'Please enter your email address to verify your account. We have sent a verification code to your email.',
@@ -48,7 +47,6 @@ class VerifyEmailScreen extends StatelessWidget {
                   color: LightAppColors.grey600,
                 ),
               ),
-
               20.ph,
               CustomVerifyEmailForm(),
               20.ph,

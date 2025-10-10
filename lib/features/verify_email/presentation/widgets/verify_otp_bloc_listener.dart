@@ -37,7 +37,7 @@ class VerifyOtpBlocListener extends StatelessWidget {
         dialogHeader: 'Verification Failed',
         dialogBody: error,
         dialogIcon: Icons.error,
-        press: () => context.pop(),
+        press: () => Navigator.of(context).pop(),
       ),
     );
   }
@@ -65,7 +65,7 @@ class VerifyOtpBlocListener extends StatelessWidget {
         dialogIcon: Icons.check_circle_rounded,
         press: () {
           Navigator.of(context).pop();
-          context.pushReplacement(Routes.loginView);
+          GoRouter.of(context).go(Routes.loginView);
         },
       ),
     );

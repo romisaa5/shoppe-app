@@ -7,7 +7,6 @@ import 'package:e_commerce_app/core/theme/app_texts/app_text_styles.dart';
 import 'package:e_commerce_app/features/login/presentation/manager/cubit/login_cubit.dart';
 import 'package:e_commerce_app/features/login/presentation/widgets/login_bloc_listener.dart';
 import 'package:e_commerce_app/features/login/presentation/widgets/login_form.dart';
-import 'package:e_commerce_app/features/sign_up/presentation/widgets/remember_me_switch.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,23 +43,34 @@ class LoginScreen extends StatelessWidget {
               40.h.ph,
               LoginForm(formKey: context.read<LoginCubit>().formKey),
               20.ph,
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {
-                    GoRouter.of(context).push(Routes.forgetpasssword);
-                  },
-                  child: Text(
-                    'Forgot password?',
-                    style: AppTextStyles.font14Regular.copyWith(
-                      color: LightAppColors.googleRed,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).push(Routes.varifyEmail);
+                    },
+                    child: Text(
+                      'Verify Email ?',
+                      style: AppTextStyles.font14Regular.copyWith(
+                        color: LightAppColors.primaryColor,
+                      ),
                     ),
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).push(Routes.forgetpasssword);
+                    },
+                    child: Text(
+                      'Forgot password?',
+                      style: AppTextStyles.font14Regular.copyWith(
+                        color: LightAppColors.googleRed,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              20.h.ph,
-              RememberMeSwitch(),
-              20.h.ph,
+              80.h.ph,
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -81,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              20.ph,
+              60.h.ph,
               RichText(
                 text: TextSpan(
                   children: [

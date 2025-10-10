@@ -12,6 +12,7 @@ import 'package:e_commerce_app/features/sign_up/presentation/manager/cubit/sign_
 import 'package:e_commerce_app/features/sign_up/presentation/screens/sign_up_screen.dart';
 import 'package:e_commerce_app/features/social_auth/presentation/screens/social_auth_screen.dart';
 import 'package:e_commerce_app/features/splash/presentation/screens/splash_screen.dart';
+import 'package:e_commerce_app/features/verify_email/presentation/manager/resend_otp/resend_otp_cubit.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_email/verify_email_cubit.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_otp/verify_otp_cubit.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/screens/otp_screen.dart';
@@ -77,7 +78,7 @@ abstract class AppRouter {
           builder: (context, state) {
             final email = state.extra as String;
             return BlocProvider(
-              create: (context) => getIt<VerifyOtpCubit>(),
+              create: (context) => getIt<VerifyEmailCubit>(),
               child: OtpScreen(email: email),
             );
           },
@@ -85,7 +86,7 @@ abstract class AppRouter {
         GoRoute(
           path: Routes.varifyEmail,
           builder: (context, state) => BlocProvider(
-            create: (context) => getIt<VerifyEmailCubit>(),
+            create: (context) => getIt<ResendOtpCubit>(),
             child: VerifyEmailScreen(),
           ),
         ),

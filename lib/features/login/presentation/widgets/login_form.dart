@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/core/common/widgets/custom_text_form_field.dart';
-import 'package:e_commerce_app/core/common/widgets/password_validations.dart';
 import 'package:e_commerce_app/core/helper/app_regex.dart';
 import 'package:e_commerce_app/core/helper/extentions.dart';
 import 'package:e_commerce_app/core/helper/validation_methods.dart';
@@ -32,7 +31,6 @@ class _LoginFormState extends State<LoginForm> {
     super.initState();
     emailController = context.read<LoginCubit>().emailController;
     passwordController = context.read<LoginCubit>().passwordController;
-    setupPasswordControllerListener();
   }
 
   @override
@@ -40,20 +38,6 @@ class _LoginFormState extends State<LoginForm> {
     passwordController.dispose();
     emailController.dispose();
     super.dispose();
-  }
-
-  void setupPasswordControllerListener() {
-    passwordController.addListener(() {
-      setState(() {
-        hasLowerCase = AppRegex.hasLowerCase(passwordController.text);
-        hasUpperCase = AppRegex.hasUpperCase(passwordController.text);
-        hasSpecialCharacters = AppRegex.hasSpecialCharacter(
-          passwordController.text,
-        );
-        hasNumber = AppRegex.hasNumber(passwordController.text);
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
-      });
-    });
   }
 
   @override
@@ -99,13 +83,6 @@ class _LoginFormState extends State<LoginForm> {
             isUnderline: true,
           ),
           15.h.ph,
-          PasswordValidations(
-            hasLowerCase: hasLowerCase,
-            hasUpperCase: hasUpperCase,
-            hasSpecialCharacters: hasSpecialCharacters,
-            hasNumber: hasNumber,
-            hasMinLength: hasMinLength,
-          ),
         ],
       ),
     );
