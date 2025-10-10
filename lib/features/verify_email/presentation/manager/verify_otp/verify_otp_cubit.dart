@@ -1,7 +1,6 @@
-import 'package:e_commerce_app/features/verify_email/presentation/manager/cubit/verify_otp_state.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_otp/verify_otp_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/networking/api_result.dart';
 import '../../../data/models/verify_otp/verify_otp_request_body.dart';
 import '../../../data/repos/verify_otp_repo.dart';

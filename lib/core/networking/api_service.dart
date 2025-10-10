@@ -4,6 +4,8 @@ import 'package:e_commerce_app/features/login/data/models/login_request_body.dar
 import 'package:e_commerce_app/features/login/data/models/login_response.dart';
 import 'package:e_commerce_app/features/sign_up/data/models/sign_up_request_body.dart';
 import 'package:e_commerce_app/features/sign_up/data/models/sign_up_response.dart';
+import 'package:e_commerce_app/features/verify_email/data/models/resend_otp/resend_otp_request_body.dart';
+import 'package:e_commerce_app/features/verify_email/data/models/verify_email/verify_email_request_body.dart';
 import 'package:e_commerce_app/features/verify_email/data/models/verify_otp/verify_otp_request_body.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -22,5 +24,14 @@ abstract class ApiService {
 
   // Verify Email API
   @POST(ApiConstants.apiVerifyEmail)
-  Future<String> verifyEmail(@Body() VerifyOtpRequestBody verifyOtpRequestBody);
+  Future<String> verifyEmail(
+    @Body() VerifyEmailRequestBody verifyEmailRequestBody,
+  );
+  // Verify Otp API
+  @POST(ApiConstants.apiVerifyOtp)
+  Future<String> verifyOtp(@Body() VerifyOtpRequestBody verifyOtpRequestBody);
+
+  // Resend Otp API
+  @POST(ApiConstants.apiResendOtp)
+  Future<String> resendOtp(@Body() ResendOtpRequestBody resendOtpRequestBody);
 }

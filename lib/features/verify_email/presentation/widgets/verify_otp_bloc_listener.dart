@@ -7,8 +7,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_colors/light_app_colors.dart';
 
-class VerifyEmailBlocListener extends StatelessWidget {
-  const VerifyEmailBlocListener({super.key});
+class VerifyOtpBlocListener extends StatelessWidget {
+  const VerifyOtpBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class VerifyEmailBlocListener extends StatelessWidget {
       context: context,
       builder: (context) => CustomAlertDialog(
         dialogColor: Colors.redAccent,
-        dialogHeader: 'Resend OTP Failed',
+        dialogHeader: 'Verification Failed',
         dialogBody: error,
         dialogIcon: Icons.error,
         press: () => context.pop(),
@@ -52,23 +52,20 @@ class VerifyEmailBlocListener extends StatelessWidget {
   }
 
   void showSuccessDialog(BuildContext context) {
-    context.pop();
-
-    GoRouter.of(context).pushReplacementNamed(
-      Routes.otpVerification,
-      extra: context.read<VerifyEmailCubit>().emailController,
-    );
-
+    if (Navigator.of(context).canPop()) {
+      Navigator.of(context).pop();
+    }
     showDialog(
       context: context,
       builder: (context) => CustomAlertDialog(
         dialogColor: LightAppColors.primaryColor,
-        dialogHeader: 'Resend OTP Successful',
+        dialogHeader: 'Verification Successful',
         dialogBody:
-            'Congratulations, you have successfully resent the OTP!\nAn OTP has been sent to your email inbox. Please use it to verify your email.',
+            'Congratulations, you have verified your email successfully!\nYou can now log in to your account.',
         dialogIcon: Icons.check_circle_rounded,
         press: () {
-          context.pop();
+          Navigator.of(context).pop();
+          context.pushReplacement(Routes.loginView);
         },
       ),
     );

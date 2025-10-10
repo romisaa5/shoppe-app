@@ -12,7 +12,7 @@ class VerifyOtpRepo {
     VerifyOtpRequestBody verifyOtpRequestBody,
   ) async {
     try {
-      final response = await _apiServices.verifyEmail(verifyOtpRequestBody);
+      final response = await _apiServices.verifyOtp(verifyOtpRequestBody);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

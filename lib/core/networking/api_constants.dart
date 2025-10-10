@@ -4,6 +4,7 @@ class ApiConstants {
   static const String registerEndpoint = 'auth/register';
   static const String loginEndpoint = 'auth/login';
   static const String apiVerifyEmail = "auth/verify-email";
+  static const String apiVerifyOtp = "auth/validate-otp";
   static const String apiResendOtp = "auth/resend-otp";
 }
 
