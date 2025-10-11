@@ -1,14 +1,14 @@
 import 'package:e_commerce_app/core/networking/api_error_handler.dart';
 import 'package:e_commerce_app/core/networking/api_result.dart';
 import 'package:e_commerce_app/core/networking/api_service.dart';
-import 'package:e_commerce_app/features/categories/data/models/category/list_of_category.dart';
+import 'package:e_commerce_app/features/products/data/models/products/products.dart';
 
-class CategoryRepo {
+class ProductsRepo {
   final ApiService apiService;
-  CategoryRepo(this.apiService);
-  Future<ApiResult<ListOfCatgory>> getCategories() async {
+  ProductsRepo(this.apiService);
+  Future<ApiResult<Products>> getProducts() async {
     try {
-      final response = await apiService.getCategories();
+      final response = await apiService.getProducts();
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

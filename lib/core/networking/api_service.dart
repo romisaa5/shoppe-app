@@ -3,6 +3,7 @@ import 'package:e_commerce_app/core/networking/api_constants.dart';
 import 'package:e_commerce_app/features/categories/data/models/category/list_of_category.dart';
 import 'package:e_commerce_app/features/login/data/models/login_request_body.dart';
 import 'package:e_commerce_app/features/login/data/models/login_response.dart';
+import 'package:e_commerce_app/features/products/data/models/products/products.dart';
 import 'package:e_commerce_app/features/sign_up/data/models/sign_up_request_body.dart';
 import 'package:e_commerce_app/features/sign_up/data/models/sign_up_response.dart';
 import 'package:e_commerce_app/features/verify_email/data/models/resend_otp/resend_otp_request_body.dart';
@@ -39,4 +40,8 @@ abstract class ApiService {
   // Category API
   @GET(ApiConstants.apiCategories)
   Future<ListOfCatgory> getCategories();
+
+  // Products API
+  @GET(ApiConstants.apiProducts)
+  Future<Products> getProducts();
 }

@@ -9,6 +9,9 @@ class ApiConstants {
 
   // category Endpoints
   static const String apiCategories = "categories";
+
+  // products Endpoints
+  static const String apiProducts = "products";
 }
 
 class ApiErrors {
