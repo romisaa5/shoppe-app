@@ -1,3 +1,6 @@
+import 'package:e_commerce_app/core/helper/constants.dart';
+import 'package:e_commerce_app/core/helper/shared_pref_helper.dart';
+import 'package:e_commerce_app/core/networking/dio_factory.dart';
 import 'package:e_commerce_app/features/login/data/repos/login_repo.dart';
 import 'package:e_commerce_app/features/login/presentation/manager/cubit/login_state.dart';
 import 'package:flutter/widgets.dart';
@@ -13,12 +16,13 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login() async {
     emit(LoginState.loading());
     final result = await _loginRepo.login(
-      emailController.text,
-      passwordController.text,
+      emailController.text.trim(),
+      passwordController.text.trim(),
     );
     result.when(
-      success: (data) {
-        emit(LoginState.success(data));
+      success: (loginResponse) async {
+        await saveUserToken(loginResponse.accessToken);
+        emit(LoginState.success(loginResponse));
       },
       failure: (error) {
         emit(
@@ -28,5 +32,13 @@ class LoginCubit extends Cubit<LoginState> {
         );
       },
     );
+  }
+
+  Future<void> saveUserToken(String token) async {
+    await SharedPrefHelper.setSecuredString(
+      key: SharedPrefKeys.userToken,
+      value: token,
+    );
+    DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 }

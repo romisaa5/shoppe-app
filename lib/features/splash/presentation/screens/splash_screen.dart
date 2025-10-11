@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/helper/constants.dart';
 import 'package:e_commerce_app/core/helper/extentions.dart';
 import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/core/theme/app_colors/light_app_colors.dart';
@@ -28,7 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 5), () {
       if (!mounted) return;
-      GoRouter.of(context).go(Routes.welcomeView);
+      GoRouter.of(
+        context,
+      ).go(isLoggedInUser ? Routes.bottnavbar : Routes.welcomeView);
     });
   }
 

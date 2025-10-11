@@ -6,6 +6,9 @@ class ApiConstants {
   static const String apiVerifyEmail = "auth/verify-email";
   static const String apiVerifyOtp = "auth/validate-otp";
   static const String apiResendOtp = "auth/resend-otp";
+
+  // category Endpoints
+  static const String apiCategories = "categories";
 }
 
 class ApiErrors {

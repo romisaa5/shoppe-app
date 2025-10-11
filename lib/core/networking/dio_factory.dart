@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:e_commerce_app/core/helper/constants.dart';
+import 'package:e_commerce_app/core/helper/shared_pref_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
@@ -14,7 +17,7 @@ class DioFactory {
       dio!
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut;
-      // addDioHeaders();
+      addDioHeaders();
       addDioInterceptor();
       return dio!;
     } else {
@@ -22,26 +25,26 @@ class DioFactory {
     }
   }
 
-  // static void addDioHeaders() async {
-  //   dio?.options.headers = {
-  //     'Accept': 'application/json',
-  //     'Authorization':
-  //         'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}',
-  //   };
-  // }
+  static Future<void> addDioHeaders() async {
+    dio?.options.headers = {
+      'Accept': '*/*',
+      'Authorization':
+          'Bearer ${await SharedPrefHelper.getSecuredString(key: SharedPrefKeys.userToken)}',
+    };
+    print('Authorization Header: ${dio?.options.headers['Authorization']}');
+  }
 
   static void setTokenIntoHeaderAfterLogin(String token) {
-    dio?.options.headers = {
-      'Authorization': 'Bearer $token',
-    };
+    dio?.options.headers = {'Authorization': 'Bearer $token'};
   }
 
   static void addDioInterceptor() {
     dio?.interceptors.add(
       PrettyDioLogger(
-        requestBody: true,
         requestHeader: true,
+        requestBody: true,
         responseHeader: true,
+        enabled: kDebugMode,
       ),
     );
   }

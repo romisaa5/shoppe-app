@@ -12,6 +12,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.regular,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font12SemiBold = TextStyle(
@@ -19,6 +20,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.semiBold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font12Bold = TextStyle(
@@ -26,6 +28,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.bold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   // ---------- Font 14 sizes ----------
@@ -34,6 +37,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.regular,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font14SemiBold = TextStyle(
@@ -41,6 +45,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.semiBold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font14Bold = TextStyle(
@@ -48,6 +53,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.bold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   // ---------- Font 16 sizes ----------
@@ -56,6 +62,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.regular,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font16SemiBold = TextStyle(
@@ -63,6 +70,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.semiBold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font16Bold = TextStyle(
@@ -70,6 +78,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.bold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   // ---------- Font 18 sizes ----------
@@ -78,6 +87,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.regular,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font18SemiBold = TextStyle(
@@ -85,6 +95,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.semiBold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font18Bold = TextStyle(
@@ -92,6 +103,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.bold,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   // ---------- Font 20 sizes ----------
@@ -100,6 +112,7 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.regular,
     fontFamily: AppFonts.cairo,
     letterSpacing: 0.5.sp,
+    decoration: TextDecoration.none,
   );
 
   static TextStyle font20SemiBold = TextStyle(

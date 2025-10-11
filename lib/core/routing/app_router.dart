@@ -14,7 +14,6 @@ import 'package:e_commerce_app/features/social_auth/presentation/screens/social_
 import 'package:e_commerce_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/manager/resend_otp/resend_otp_cubit.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_email/verify_email_cubit.dart';
-import 'package:e_commerce_app/features/verify_email/presentation/manager/verify_otp/verify_otp_cubit.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/screens/otp_screen.dart';
 import 'package:e_commerce_app/features/verify_email/presentation/screens/verify_email_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

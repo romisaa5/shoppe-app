@@ -10,3 +10,7 @@ extension EmptyPadding on num {
   SizedBox get ph => SizedBox(height: toDouble());
   SizedBox get pw => SizedBox(width: toDouble());
 }
+
+extension StringExtension on String? {
+  bool isNullOrEmpty() => this == null || this == "";
+}

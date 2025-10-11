@@ -1,95 +1,116 @@
-import 'package:flutter/material.dart';
+import 'package:e_commerce_app/core/helper/app_logger.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefHelper {
-  // private constructor as I don't want to allow creating an instance of this class itself.
   SharedPrefHelper._();
 
+  static late SharedPreferences _prefs;
+  static late FlutterSecureStorage _secureStorage;
+
+  /// Initializes the SharedPreferences instance.
+
+  static init() async {
+    _prefs = await SharedPreferences.getInstance();
+    _secureStorage = const FlutterSecureStorage();
+  }
+
+  /// Saves a [value] with a [key] in the SharedPreferences.
+  static Future<void> setData({
+    required String key,
+    required dynamic value,
+  }) async {
+    AppLogger.log(
+      "SharedPrefHelper : Set data with key : $key and value : $value",
+    );
+    switch (value.runtimeType) {
+      case String:
+        await _prefs.setString(key, value);
+        break;
+      case int:
+        await _prefs.setInt(key, value);
+        break;
+      case bool:
+        await _prefs.setBool(key, value);
+        break;
+      case double:
+        await _prefs.setDouble(key, value);
+        break;
+      case const (List<String>):
+        await _prefs.setStringList(key, value);
+        break;
+      default:
+        return;
+    }
+  }
+
+  /// Gets an int value from SharedPreferences with given [key].
+  static int? getInt({required String key}) {
+    AppLogger.log('SharedPrefHelper : Get int with key : $key');
+    return _prefs.getInt(key) ?? 0;
+  }
+
+  /// Gets a double value from SharedPreferences with given [key].
+  static double? getDouble({required String key}) {
+    AppLogger.log('SharedPrefHelper : Get double with key : $key');
+    return _prefs.getDouble(key) ?? 0.0;
+  }
+
+  /// Gets an String value from SharedPreferences with given [key].
+  static String? getString({required String key}) {
+    AppLogger.log('SharedPrefHelper : Get string with key : $key');
+    return _prefs.getString(key) ?? '';
+  }
+
+  /// Gets a bool value from SharedPreferences with given [key].
+  static bool? getBool({required String key}) {
+    AppLogger.log('SharedPrefHelper : Get bool with key : $key');
+    return _prefs.getBool(key) ?? false;
+  }
+
+  /// Gets a list values from SharedPreferences with given [key].
+  static List<String>? getStringList({required String key}) {
+    AppLogger.log('SharedPrefHelper : Get string list with key : $key');
+    return _prefs.getStringList(key) ?? [];
+  }
+
   /// Removes a value from SharedPreferences with given [key].
-  static removeData(String key) async {
-    debugPrint('SharedPrefHelper : data with key : $key has been removed');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.remove(key);
+  static removeData({required String key}) async {
+    AppLogger.log('SharedPrefHelper : Remove data with key : $key');
+    await _prefs.remove(key);
   }
 
   /// Removes all keys and values in the SharedPreferences
   static clearAllData() async {
-    debugPrint('SharedPrefHelper : all data has been cleared');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
-  }
-
-  /// Saves a [value] with a [key] in the SharedPreferences.
-  static setData(String key, value) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    debugPrint("SharedPrefHelper : setData with key : $key and value : $value");
-    switch (value.runtimeType) {
-      case String:
-        await sharedPreferences.setString(key, value);
-        break;
-      case int:
-        await sharedPreferences.setInt(key, value);
-        break;
-      case bool:
-        await sharedPreferences.setBool(key, value);
-        break;
-      case double:
-        await sharedPreferences.setDouble(key, value);
-        break;
-      default:
-        return null;
-    }
-  }
-
-  /// Gets a bool value from SharedPreferences with given [key].
-  static getBool(String key) async {
-    debugPrint('SharedPrefHelper : getBool with key : $key');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool(key) ?? false;
-  }
-
-  /// Gets a double value from SharedPreferences with given [key].
-  static getDouble(String key) async {
-    debugPrint('SharedPrefHelper : getDouble with key : $key');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getDouble(key) ?? 0.0;
-  }
-
-  /// Gets an int value from SharedPreferences with given [key].
-  static getInt(String key) async {
-    debugPrint('SharedPrefHelper : getInt with key : $key');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getInt(key) ?? 0;
-  }
-
-  /// Gets an String value from SharedPreferences with given [key].
-  static getString(String key) async {
-    debugPrint('SharedPrefHelper : getString with key : $key');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString(key) ?? '';
+    AppLogger.log('SharedPrefHelper : Clear all data');
+    await _prefs.clear();
   }
 
   /// Saves a [value] with a [key] in the FlutterSecureStorage.
-  static setSecuredString(String key, String value) async {
-    const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint(
-      "FlutterSecureStorage : setSecuredString with key : $key and value : $value",
+  static setSecuredString({required String key, required String value}) async {
+    AppLogger.log(
+      "FlutterSecureStorage : Set secured string with key : $key and value : $value",
     );
-    await flutterSecureStorage.write(key: key, value: value);
+    await _secureStorage.write(key: key, value: value);
   }
 
   /// Gets an String value from FlutterSecureStorage with given [key].
-  static getSecuredString(String key) async {
-    const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint('FlutterSecureStorage : getSecuredString with key :');
-    return await flutterSecureStorage.read(key: key) ?? '';
+  static getSecuredString({required String key}) async {
+    AppLogger.log('FlutterSecureStorage : Get secured string with key : $key');
+    return await _secureStorage.read(key: key) ?? '';
+  }
+
+  /// Removes a value from FlutterSecureStorage with given [key].
+  static deleteSecureString({required String key}) async {
+    AppLogger.log(
+      'FlutterSecureStorage : Delete secured string with key : $key',
+    );
+    return await _secureStorage.delete(key: key);
   }
 
   /// Removes all keys and values in the FlutterSecureStorage
   static clearAllSecuredData() async {
-    debugPrint('FlutterSecureStorage : all data has been cleared');
-    const flutterSecureStorage = FlutterSecureStorage();
-    await flutterSecureStorage.deleteAll();
+    AppLogger.log('FlutterSecureStorage : Clear all secured data.');
+    await _secureStorage.deleteAll();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/core/networking/api_constants.dart';
+import 'package:e_commerce_app/features/home/data/models/category/list_of_category.dart';
 import 'package:e_commerce_app/features/login/data/models/login_request_body.dart';
 import 'package:e_commerce_app/features/login/data/models/login_response.dart';
 import 'package:e_commerce_app/features/sign_up/data/models/sign_up_request_body.dart';
@@ -34,4 +35,8 @@ abstract class ApiService {
   // Resend Otp API
   @POST(ApiConstants.apiResendOtp)
   Future<String> resendOtp(@Body() ResendOtpRequestBody resendOtpRequestBody);
+
+  // Category API
+  @GET(ApiConstants.apiCategories)
+  Future<ListOfCatgory> getCategories();
 }
