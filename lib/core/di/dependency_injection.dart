@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/core/networking/api_service.dart';
-import 'package:e_commerce_app/features/home/data/repos/category_repo.dart';
-import 'package:e_commerce_app/features/home/presentation/manager/category_cubit/category_cubit.dart';
+import 'package:e_commerce_app/features/categories/data/repos/category_repo.dart';
+import 'package:e_commerce_app/features/categories/presentation/manager/category_cubit/category_cubit.dart';
 import 'package:e_commerce_app/features/login/presentation/manager/cubit/login_cubit.dart';
 import 'package:e_commerce_app/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:e_commerce_app/features/sign_up/presentation/manager/cubit/sign_up_cubit.dart';

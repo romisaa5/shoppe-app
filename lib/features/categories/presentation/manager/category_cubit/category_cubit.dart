@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/core/networking/api_result.dart';
-import 'package:e_commerce_app/features/home/data/models/category/list_of_category.dart';
-import 'package:e_commerce_app/features/home/data/repos/category_repo.dart';
-import 'package:e_commerce_app/features/home/presentation/manager/category_cubit/category_state.dart';
+import 'package:e_commerce_app/features/categories/data/models/category/list_of_category.dart';
+import 'package:e_commerce_app/features/categories/data/repos/category_repo.dart';
+import 'package:e_commerce_app/features/categories/presentation/manager/category_cubit/category_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {

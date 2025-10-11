@@ -1,9 +1,9 @@
 import 'package:e_commerce_app/core/helper/extentions.dart';
 import 'package:e_commerce_app/core/theme/app_colors/light_app_colors.dart';
 import 'package:e_commerce_app/core/theme/app_texts/app_text_styles.dart';
-import 'package:e_commerce_app/features/home/presentation/manager/category_cubit/category_cubit.dart';
-import 'package:e_commerce_app/features/home/presentation/manager/category_cubit/category_state.dart';
-import 'package:e_commerce_app/features/home/presentation/widgets/custom_category_card.dart';
+import 'package:e_commerce_app/features/categories/presentation/manager/category_cubit/category_cubit.dart';
+import 'package:e_commerce_app/features/categories/presentation/manager/category_cubit/category_state.dart';
+import 'package:e_commerce_app/features/categories/presentation/widgets/custom_category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
