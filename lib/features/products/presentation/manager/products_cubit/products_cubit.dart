@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/core/networking/api_result.dart';
 import 'package:e_commerce_app/features/products/data/repos/products_repo.dart';
-import 'package:e_commerce_app/features/products/presentation/manager/cubit/products_state.dart';
+import 'package:e_commerce_app/features/products/presentation/manager/products_cubit/products_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
